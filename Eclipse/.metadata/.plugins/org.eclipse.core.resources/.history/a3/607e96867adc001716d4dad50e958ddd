@@ -1,0 +1,114 @@
+package application;
+	
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+
+public class Main extends Application {
+	int max;
+	int nextMax;
+	int nextNextMax;
+	int nextMin;
+	int min;
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			Pane root = new Pane();
+			Scene scene = new Scene(root,400,400);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			
+			TextField textbox = new TextField();
+			textbox.setTranslateX(150);
+			root.getChildren().add(textbox);
+			
+			Label num1 = new Label();
+			Label num2 = new Label();
+			Label num3 = new Label();
+			Label num4 = new Label();
+			Label num5 = new Label();
+			Label no = new Label();
+			
+			String file = "filepractice.txt";
+			FileWriter fwOver = new FileWriter(file, false);
+			FileWriter fwAppend = new FileWriter(file, true);
+			BufferedReader br= new BufferedReader(new FileReader(file));
+			textbox.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			    @Override
+			    public void handle(KeyEvent keyEvent) {
+			        if (keyEvent.getCode() == KeyCode.ENTER)  {
+			        	
+			        	//sets the line info information
+			        	String name = textbox.getText();
+			        	textbox.setText("");
+			        	int score = 5;
+			            String info = score + "," + name; 
+			            try {
+							//https://stackoverflow.com/questions/15532695/want-to-start-reading-a-file-from-a-specific-point
+							String line = br.readLine();
+							String tempLine;
+							
+							int num;
+							int x=0;
+							if (line != "") {
+								String [] arrayLine = line.split(",");
+								System.out.println(String.valueOf(arrayLine));
+								num = Integer.valueOf(arrayLine[0]);
+								while(x!=5) {
+									if((score>num)){
+										tempLine = br.readLine();
+										fwOver.write(String.join(" ", info));
+										fwOver.close();
+										fwAppend.write(tempLine);
+										fwAppend.close();
+										score++;
+										x++;
+									}
+									else{
+										fwAppend.write(String.join(" ", info));
+										fwAppend.close();
+										x++;
+									}
+				            	}
+							}
+							else {
+								fwAppend.write(info);
+								fwAppend.close();
+							}
+									
+							int [] scores =new int[5];
+							
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+;			        }
+			    }
+			});
+			root.getChildren().addAll(num1, num2, num3, num4, num5, no);
+			
+			
+			
+			primaryStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+}

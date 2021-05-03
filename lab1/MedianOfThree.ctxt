@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=MedianOfThree
+comment0.text=\r\n\ Finds\ the\ Median\ of\ 3\ numbers\r\n\r\n\ @author\ Linsey\ Stokes\r\n\ @version\ 9/6/17\r\n
+comment1.params=
+comment1.target=void\ Median()
+numComments=2

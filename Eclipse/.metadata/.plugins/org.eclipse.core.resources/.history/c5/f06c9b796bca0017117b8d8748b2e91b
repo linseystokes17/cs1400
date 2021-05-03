@@ -1,0 +1,180 @@
+package application;
+
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+
+public class Main extends Application {
+	int count = 0;
+	Boolean timesTwoActive = false;
+	Boolean timesFourActive = false;
+	Boolean timesEightActive=false;
+	
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			BorderPane root = new BorderPane();
+			Scene scene = new Scene(root,400,400);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			
+			
+			//start code from https://stackoverflow.com/questions/20472802/custom-javafx-button-shapes
+			String c = "https://eleventhstack.files.wordpress.com/2013/06/chocolate_chip_cookies.jpg";
+			
+			//start code from https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx
+			Image cookie = new Image(c, 100, 100, false, false);
+			//end code from https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx
+			
+			
+			//start cookie button
+			Button clicker = new Button();
+			clicker.setGraphic(new ImageView(cookie));
+			clicker.setLayoutY(200);
+			clicker.setLayoutX(200);
+			//end code from https://stackoverflow.com/questions/20472802/custom-javafx-button-shapes
+			root.getChildren().add(clicker);
+			//end cookie button
+			
+			Button twoTimes = new Button();
+			Image x2 = new Image("x2.png", 50, 50, false,false);
+			twoTimes.setGraphic(new ImageView(x2));
+			twoTimes.setLayoutX(25);
+			twoTimes.setLayoutY(100);
+			twoTimes.setVisible(false);
+			root.getChildren().add(twoTimes);
+			
+			Button fourTimes = new Button();
+			Image x4 = new Image("x4.png", 50, 50, false, false);
+			fourTimes.setGraphic(new ImageView(x4));
+			fourTimes.setLayoutX(25);
+			fourTimes.setLayoutY(150);
+			fourTimes.setVisible(false);
+			root.getChildren().add(fourTimes);
+			
+			Button eightTimes = new Button();
+			Image x8 = new Image("x8.png", 50, 50, false, false);
+			eightTimes.setGraphic(new ImageView(x8));
+			eightTimes.setLayoutX(25);
+			eightTimes.setLayoutY(200);
+			eightTimes.setVisible(false);
+			root.getChildren().add(eightTimes);
+			
+			
+			
+			//start counter
+			Text counter = new Text(150, 25, "Cookies: ");
+			root.getChildren().add(counter);
+
+			
+			//start code from https://stackoverflow.com/questions/13359382/creating-a-mouselistner-to-javafx-rectangle
+			clicker.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				public void handle(MouseEvent t)
+				{
+					
+					//end code from https://stackoverflow.com/questions/13359382/creating-a-mouselistner-to-javafx-rectangle
+					if (timesTwoActive==false)
+						{
+							count++;
+							//String scount = String.valueOf(count);
+							//counter.setText("Cookies: " + scount);
+						}
+					if (timesTwoActive == true) {
+						twoTimes.setVisible(false);
+						count+=2;
+						//String scount = String.valueOf(count);
+						//counter.setText("Cookies: " + scount);
+					}
+					if (timesFourActive == true) {
+						fourTimes.setVisible(false);
+						count = count+6;
+						//String scount = String.valueOf(count);
+						//counter.setText("Cookies: " + scount);
+					}
+					if (timesEightActive == true) {
+						eightTimes.setVisible(false);
+						count=count+56;
+						//String scount = String.valueOf(count);
+						//counter.setText("Cookies: " + scount);
+					}
+					if((count>=10)&&(timesTwoActive==false))
+					{
+							twoTimes.setVisible(true);
+							//start code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+							twoTimes.setOnMouseClicked(new EventHandler<MouseEvent>() {
+								@Override public void handle(MouseEvent e) {
+									//end code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+									count-=10;
+									//String scount = String.valueOf(count);
+									//counter.setText("Cookies: " + scount);
+									timesTwoActive=true;
+									
+								}
+						});
+						
+					}
+					
+					if((count>=20)&&(timesFourActive==false))
+					{
+							fourTimes.setVisible(true);
+							//start code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+							fourTimes.setOnMouseClicked(new EventHandler<MouseEvent>() {
+								@Override public void handle(MouseEvent e) {
+									//end code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+									count-=20;
+									//String scount = String.valueOf(count);
+									//counter.setText("Cookies: " + scount);
+									timesFourActive=true;
+									
+								}
+						});
+						
+					}
+					if((count>=50)&&(timesEightActive==false))
+					{
+							eightTimes.setVisible(true);
+							//start code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+							eightTimes.setOnMouseClicked(new EventHandler<MouseEvent>() {
+								@Override public void handle(MouseEvent e) {
+									//end code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+									count-=50;
+									//String scount = String.valueOf(count);
+									//counter.setText("Cookies: " + scount);
+									timesEightActive=true;
+									
+								}
+						});
+						
+					}
+					if(count >= 100) {
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Winner");
+						alert.setContentText("Congratulations, X won!");
+						alert.show();
+					}		
+					String scount = String.valueOf(count);
+					counter.setText("Cookies: " + scount);
+			}
+			});
+			//end counter
+
+			primaryStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+}

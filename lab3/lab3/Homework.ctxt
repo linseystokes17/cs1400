@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Homework
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ InClass\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=a
+comment1.target=int\ minArray(int[])
+comment2.params=a
+comment2.target=int\ maxArray(int[])
+comment3.params=a
+comment3.target=int\ minIndex(int[])
+comment4.params=a
+comment4.target=int\ maxIndex(int[])
+comment5.params=a
+comment5.target=int\ sumOfOdds(int[])
+comment6.params=a
+comment6.target=int\ validEmails(java.lang.String[])
+comment7.params=strength
+comment7.target=int\ strongerTeam(int[])
+numComments=8

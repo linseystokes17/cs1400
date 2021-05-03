@@ -1,0 +1,339 @@
+package application;
+
+import java.util.Random;
+
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+
+public class Main extends Application {
+	int count = 0;
+	Circle smallCookies;
+	Boolean timesTwoActive = false;
+	Boolean timesFourActive = false;
+	Boolean timesEightActive=false;
+	Random random= new Random(25);
+	Boolean smallCookie1Active = false;
+	Boolean smallCookie2Active = false;
+	Boolean smallCookie3Active = false;
+	
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			BorderPane root = new BorderPane();
+			Scene scene = new Scene(root,400,400);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			
+			
+			//start code from https://stackoverflow.com/questions/20472802/custom-javafx-button-shapes
+			String c = "https://eleventhstack.files.wordpress.com/2013/06/chocolate_chip_cookies.jpg";
+			
+			//start code from https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx
+			Image cookie = new Image(c, 100, 100, false, false);
+			Image smallCookieImage = new Image(c, 50, 50, false, false);
+			//end code from https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx
+			
+			
+			//start cookie button
+			Button clicker = new Button();
+			clicker.setGraphic(new ImageView(cookie));
+			clicker.setPrefSize(100, 100);
+			clicker.setLayoutY(200);
+			clicker.setLayoutX(200);
+			//end code from https://stackoverflow.com/questions/20472802/custom-javafx-button-shapes
+			root.getChildren().add(clicker);
+			//end cookie button
+			
+			Button twoTimes = new Button();
+			Image x2 = new Image("x2.png", 50, 50, false,false);
+			twoTimes.setGraphic(new ImageView(x2));
+			twoTimes.setLayoutX(25);
+			twoTimes.setLayoutY(100);
+			twoTimes.setVisible(false);
+			root.getChildren().add(twoTimes);
+			
+			Button fourTimes = new Button();
+			Image x4 = new Image("x4.png", 50, 50, false, false);
+			fourTimes.setGraphic(new ImageView(x4));
+			fourTimes.setLayoutX(25);
+			fourTimes.setLayoutY(150);
+			fourTimes.setVisible(false);
+			root.getChildren().add(fourTimes);
+			
+			Button eightTimes = new Button();
+			Image x8 = new Image("x8.png", 50, 50, false, false);
+			eightTimes.setGraphic(new ImageView(x8));
+			eightTimes.setLayoutX(25);
+			eightTimes.setLayoutY(200);
+			eightTimes.setVisible(false);
+			root.getChildren().add(eightTimes);
+
+			//small cookie #1 animation
+			Circle smallCookie1 = new Circle(25);
+			smallCookie1.setCenterX(25);
+			smallCookie1.setFill(new ImagePattern(smallCookieImage));
+			smallCookie1.setVisible(false);
+			root.getChildren().add(smallCookie1);
+			
+			Path waterfall1 = new Path();
+			waterfall1.getElements().add(new MoveTo(120, -25));
+			//start code from https://docs.oracle.com/javase/8/javafx/api/javafx/scene/shape/CubicCurveTo.html
+			waterfall1.getElements().add(new CubicCurveTo(50, 100, 125, 300, 120, 425));
+			//end code from https://docs.oracle.com/javase/8/javafx/api/javafx/scene/shape/CubicCurveTo.html
+			PathTransition falling = new PathTransition();
+			falling.setDuration(Duration.seconds(5)); //sets length it takes to animate
+			falling.setPath(waterfall1); //moves animation down
+			//start code from https://docs.oracle.com/javafx/2/animations/basics.htm
+			falling.setCycleCount(Timeline.INDEFINITE);
+			//end code from https://docs.oracle.com/javafx/2/animations/basics.htm
+			falling.setNode(smallCookie1); //makes animation affect small cookies
+			
+			//small cookie #2 animation
+			Circle smallCookie2 = new Circle(25);
+			smallCookie2.setCenterX(25);
+			smallCookie2.setFill(new ImagePattern(smallCookieImage));
+			smallCookie2.setVisible(false);
+			root.getChildren().add(smallCookie2);
+			
+			Path waterfall2 = new Path();
+			waterfall2.getElements().add(new MoveTo(350, -25));
+			//start code from https://docs.oracle.com/javase/8/javafx/api/javafx/scene/shape/CubicCurveTo.html
+			waterfall2.getElements().add(new CubicCurveTo(375, 100, 300, 300, 350, 425));
+			//end code from https://docs.oracle.com/javase/8/javafx/api/javafx/scene/shape/CubicCurveTo.html
+			PathTransition falling2 = new PathTransition();
+			falling2.setDuration(Duration.seconds(5)); //sets length it takes to animate
+			falling2.setPath(waterfall2); //moves animation down
+			//start code from https://docs.oracle.com/javafx/2/animations/basics.htm
+			falling2.setCycleCount(Timeline.INDEFINITE);
+			//end code from https://docs.oracle.com/javafx/2/animations/basics.htm
+			falling2.setNode(smallCookie2); //makes animation affect small cookies
+			
+			//small cookie #3 animation
+			Circle smallCookie3 = new Circle(25);
+			smallCookie3.setCenterX(25);
+			smallCookie3.setFill(new ImagePattern(smallCookieImage));
+			smallCookie3.setVisible(false);
+			root.getChildren().add(smallCookie3);
+			
+			Path waterfall3 = new Path();
+			waterfall3.getElements().add(new MoveTo(300, -25));
+			//start code from https://docs.oracle.com/javase/8/javafx/api/javafx/scene/shape/CubicCurveTo.html
+			waterfall3.getElements().add(new CubicCurveTo(274, 100, 350, 300, 300, 425));
+			//end code from https://docs.oracle.com/javase/8/javafx/api/javafx/scene/shape/CubicCurveTo.html
+			PathTransition falling3 = new PathTransition();
+			falling3.setDuration(Duration.seconds(5)); //sets length it takes to animate
+			falling3.setPath(waterfall3); //moves animation down
+			//start code from https://docs.oracle.com/javafx/2/animations/basics.htm
+			falling3.setCycleCount(Timeline.INDEFINITE);
+			//end code from https://docs.oracle.com/javafx/2/animations/basics.htm
+			falling3.setNode(smallCookie3); //makes animation affect small cookies
+
+
+			//start counter
+			Text counter = new Text(150, 25, "Cookies: ");
+			root.getChildren().add(counter);
+			
+			if (smallCookie1Active == true) {
+				smallCookie1.setVisible(false);
+				falling.stop();
+			}
+			if (smallCookie2Active == true) {
+				smallCookie2.setVisible(false);
+				falling2.stop();
+			}
+			if (smallCookie3Active == true) {
+				smallCookie3.setVisible(false);
+				falling3.stop();
+			}
+			
+			//start code from https://stackoverflow.com/questions/13359382/creating-a-mouselistner-to-javafx-rectangle
+			clicker.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				public void handle(MouseEvent t)
+				{
+					//end code from https://stackoverflow.com/questions/13359382/creating-a-mouselistner-to-javafx-rectangle
+					
+					
+					
+					
+					if (timesTwoActive==false)
+					{
+						count++;
+						String scount = String.valueOf(count);
+						counter.setText("Cookies: " + scount);
+					}
+					if (timesTwoActive == true) {
+						twoTimes.setVisible(false);
+						smallCookie1.setVisible(true);
+						falling.play();
+						count+=2;
+						String scount = String.valueOf(count);
+						counter.setText("Cookies: " + scount);
+						smallCookie1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							@Override public void handle(MouseEvent e) {
+								count+=50;
+								String scount = String.valueOf(count);
+								counter.setText("Cookies: " + scount);
+								smallCookie1Active = true;
+								smallCookie1.setVisible(false);
+								falling.stop();
+							}
+						});
+					}
+					if (timesFourActive == true) {
+						fourTimes.setVisible(false);
+						smallCookie2.setVisible(true);
+						falling2.play();
+						count = count+6;
+						String scount = String.valueOf(count);
+						counter.setText("Cookies: " + scount);
+						smallCookie2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							@Override public void handle(MouseEvent e) {
+								count+=50;
+								String scount = String.valueOf(count);
+								counter.setText("Cookies: " + scount);
+								smallCookie2Active = true;
+								smallCookie2.setVisible(false);
+								falling2.stop();
+							}
+						});
+					}
+					if (timesEightActive == true) {
+						eightTimes.setVisible(false);
+						smallCookie3.setVisible(true);
+						falling3.play();
+						count=count+56;
+						String scount = String.valueOf(count);
+						counter.setText("Cookies: " + scount);
+						smallCookie3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							@Override public void handle(MouseEvent e) {
+								count+=50;
+								String scount = String.valueOf(count);
+								counter.setText("Cookies: " + scount);
+								smallCookie3Active = true;
+								smallCookie3.setVisible(false);
+								falling3.stop();
+							}
+						});
+					}
+					if((count>=100)&&(timesTwoActive==false)){
+						twoTimes.setVisible(true);
+						//start code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+						twoTimes.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							@Override public void handle(MouseEvent e) {
+								//end code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+								count-=100;
+								String scount = String.valueOf(count);
+								counter.setText("Cookies: " + scount);
+								timesTwoActive=true;
+								twoTimes.setVisible(false);
+							}
+						});
+						
+					}	
+					if((count>=200)&&(timesFourActive==false))
+					{
+							fourTimes.setVisible(true);
+							//start code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+							fourTimes.setOnMouseClicked(new EventHandler<MouseEvent>() {
+								@Override public void handle(MouseEvent e) {
+									//end code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+									count-=200;
+									String scount = String.valueOf(count);
+									counter.setText("Cookies: " + scount);
+									timesFourActive=true;
+									fourTimes.setVisible(false);;
+								}
+						});
+							
+					}
+					if((count>=500)&&(timesEightActive==false))
+					{
+							eightTimes.setVisible(true);
+							//start code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+							eightTimes.setOnMouseClicked(new EventHandler<MouseEvent>() {
+								@Override public void handle(MouseEvent e) {
+									//end code from https://docs.oracle.com/javafx/2/ui_controls/button.htm
+									count-=500;
+									String scount = String.valueOf(count);
+									counter.setText("Cookies: " + scount);
+									timesEightActive=true;	
+									eightTimes.setVisible(false);
+								}
+						});		
+							
+					}
+					if(count >= 1000) {
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Winner");
+						alert.setContentText("Congratulations! You are the cookie master!");
+						alert.show();
+						falling.stop();
+						falling2.stop();
+						falling3.stop();
+						reset();
+					}
+					if(smallCookie1Active==true) {
+						smallCookie1.setVisible(false);
+						falling.stop();
+					}
+					if(smallCookie2Active==true) {
+						smallCookie2.setVisible(false);
+						falling2.stop();
+					}
+					if(smallCookie3Active==true) {
+						smallCookie3.setVisible(false);
+						falling3.stop();
+					}
+				}
+			});
+			String scount = String.valueOf(count);
+			counter.setText("Cookies: " + scount);
+			//end counter
+			primaryStage.show();
+		} 
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void reset()
+	{
+		count =0;
+		timesTwoActive = false;
+		timesFourActive = false;
+		timesEightActive = false;
+		smallCookie1Active = false;
+		smallCookie2Active = false;
+		smallCookie3Active = false;
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+}
+
+
+/*Turning in 
+ * move project to folder
+ * compress to zip
+ * name MWFLinseyStokes
+ * */

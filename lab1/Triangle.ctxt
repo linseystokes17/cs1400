@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Triangle
+comment0.text=\r\n\ Calculates\ the\ perimeter\ and\ area\ of\ a\ triangle\r\n\r\n\ @author\ Linsey\ Stokes\r\n\ @version\ 9/1/17\r\n
+comment1.params=
+comment1.target=void\ areaFromSides()
+comment2.params=
+comment2.target=void\ perimeter()
+numComments=3

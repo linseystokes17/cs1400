@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=loops
+comment0.text=\r\n\ All\ programs\ within\ lab2\r\n\r\n\ @author\ Linsey\ Stokes\r\n\ @version\ 9/13/2017\r\n
+comment1.params=
+comment1.target=void\ forRootBeer()
+comment2.params=
+comment2.target=void\ removeVowels()
+comment3.params=
+comment3.target=void\ classAdditionTables()
+comment4.params=
+comment4.target=void\ factorial()
+comment5.params=
+comment5.target=void\ printMenu()
+numComments=6

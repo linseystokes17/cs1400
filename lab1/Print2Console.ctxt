@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Print2Console
+comment0.text=\r\n\ Print2Console\ prints\ several\ pieces\ of\ text\ to\ the\ console\r\n\r\n\ author\:\ Linsey\ Stokes\r\n\ version\:\ 8/28/2017\r\n
+comment1.params=
+comment1.target=void\ helloWorld()
+comment2.params=
+comment2.target=void\ poem()
+numComments=3
